@@ -38,6 +38,7 @@ function FormLogin({ formLg }) {
                 <button
                   className="bg-4-blue hover:bg-3-blue text-white w-80 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   onClick={() => navigate("/register")}
+                  type="button"
                 >
                   Register
                 </button>

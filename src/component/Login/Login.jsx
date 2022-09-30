@@ -20,7 +20,7 @@ function Login() {
 
   return (
     <div>
-      <div className="h-screen bg-gradient-to-b from-G1-blue via-2-blue/95 to-2-blue/80">
+      <div className="lg:h-screen bg-gradient-to-b from-G1-blue via-2-blue/95 to-2-blue/80">
         <NavBarLogin />
         <div className="">
           <div className="hidden lg:grid">

@@ -1,11 +1,11 @@
 import React from "react";
 
-function logoInformant() {
+function LogoInformant() {
   return (
-    <div>
+    <button type="button">
       <svg
-        width="481"
-        height="296"
+        width="281"
+        height="196"
         viewBox="0 0 481 296"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -199,13 +199,13 @@ function logoInformant() {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(206.5 131) rotate(90) scale(118 125.5)"
           >
-            <stop offset="0.552083" stop-color="white" />
+            <stop offset="0.552083" stopColor="white" />
             <stop offset="1" />
           </radialGradient>
         </defs>
       </svg>
-    </div>
+    </button>
   );
 }
 
-export default logoInformant;
+export default LogoInformant;
