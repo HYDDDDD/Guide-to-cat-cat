@@ -9,6 +9,9 @@ module.exports = {
         "2-blue": "#98D4FA",
         "G1-blue": "#73C7FC",
       },
+      gridTemplateColumns: {
+        "1fr": "repeat(2,1fr)",
+      },
     },
   },
   plugins: [],
