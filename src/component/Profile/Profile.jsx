@@ -2,6 +2,8 @@ import React from "react";
 import NavigationBar from "../Navigation_bar/NavigationBar";
 import MenuBar from "../Menu/Menu";
 import User from "./User";
+import StoryUser from "./StoryUser";
+import TreasuryLikes from "./TreasuryLikes";
 
 function Profile() {
   return (
@@ -10,14 +12,13 @@ function Profile() {
       <div>
         <div className="flex">
           <MenuBar />
-          <User />
+          <div className="w-screen mt-16 py-2 lg:ml-64">
+            <User />
+            <StoryUser />
+            <TreasuryLikes />
+          </div>
         </div>
       </div>
-      {/* <NavigationBar/>
-      <div className="grid grid-cols-1fr">
-        <MenuBar/>
-        <User/>
-      </div> */}
     </div>
   );
 }

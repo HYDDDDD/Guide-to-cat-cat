@@ -9,7 +9,10 @@ function NavBarLogin() {
       <div className="container mx-auto">
         <div className="flex items-center justify-between py-4">
           <div className="hidden sm:flex sm:items-center">
-            <button className="text-black text-sm font-semibold hover:text-blue-600 mr-4">
+            <button
+              className="text-black text-sm font-semibold hover:text-blue-600 mr-4"
+              type="button"
+            >
               Home
             </button>
             <button className="text-black text-sm font-semibold hover:text-blue-600 mr-4">

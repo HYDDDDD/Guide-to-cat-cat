@@ -8,7 +8,7 @@ import picSetting from "../Picture/setting.png";
 function Menu() {
   return (
     <div className="mt-16">
-      <div className="hidden bg-gradient-to-b from-3-blue via-2-blue to-white sm:fixed sm:mt-2 sm:block sm:w-64 sm:h-screen ">
+      <div className="hidden bg-gradient-to-b from-3-blue via-2-blue to-white lg:fixed lg:mt-2 lg:block lg:w-64 lg:h-screen ">
         <div className="px-5 pt-5 text-xl font-semibold">Home</div>
         <div className="bg-3-blue mt-4 py-2 px-5 flex space-x-2">
           <div>
@@ -62,7 +62,7 @@ function Menu() {
         </div>
       </div>
 
-      <div className="flex justify-center space-x-10 p-2 bg-3-blue fixed bottom-0 left-0 w-full sm:hidden ">
+      <div className="flex justify-center space-x-10 p-2 bg-3-blue fixed bottom-0 left-0 w-full lg:hidden ">
         <button type="button">
           <img
             className="w-12 h-12"
