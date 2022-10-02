@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 
 function FormLogin({ formLg }) {
@@ -25,13 +25,16 @@ function FormLogin({ formLg }) {
     if (handleValidation() === true) {
       signInWithEmailAndPassword(auth, email, password)
         .then((user) => {
-          console.log(user);
+          navigate("/profile");
         })
-        .catch((error) => error.message);
-
+        .catch((error) => {
+          console.error(error.message);
+          setEmail("");
+          setPassword("");
+          alert("Invalid email or password.");
+        });
       setEmail("");
       setPassword("");
-      navigate("/profile");
     }
   };
 
@@ -45,6 +48,7 @@ function FormLogin({ formLg }) {
                 className="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Email"
+                value={email}
                 onChange={(event) => {
                   setEmail(event.target.value);
                 }}
@@ -55,6 +59,7 @@ function FormLogin({ formLg }) {
                 className="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 type="password"
                 placeholder="******************"
+                value={password}
                 onChange={(event) => {
                   setPassword(event.target.value);
                 }}
@@ -131,6 +136,7 @@ function FormLogin({ formLg }) {
                 className="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Email"
+                value={email}
                 onChange={(event) => {
                   setEmail(event.target.value);
                 }}
@@ -141,6 +147,7 @@ function FormLogin({ formLg }) {
                 className="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 type="password"
                 placeholder="******************"
+                value={password}
                 onChange={(event) => {
                   setPassword(event.target.value);
                 }}

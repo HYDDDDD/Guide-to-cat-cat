@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import LogoInformant from "./LogoInformant";
 import LogoSeeker from "./LogoSeeker";
 import { auth } from "../../firebase/firebase-config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import ProfilePic from "../Picture/ProfilePic.png";
 
 function Register() {
   const navigate = useNavigate();
@@ -55,9 +56,14 @@ function Register() {
 
   const createNewUser = () => {
     if (handleValidation() === true) {
-      createUserWithEmailAndPassword(auth, name, email, password)
-        .then((user) => {
-          console.log(user);
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(async (user) => {
+          await updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: ProfilePic,
+          });
+
+          //console.log(user);
         })
         .catch((error) => error.message);
 
@@ -68,6 +74,7 @@ function Register() {
       setPassword("");
       setPasswordAgain("");
       alert("Successful registration.");
+      navigate("/");
     }
   };
 
@@ -168,7 +175,7 @@ function Register() {
                 <div className="lg:ml-24">
                   <button
                     className="text-white text-sm font-semibold px-4 py-2 rounded-3xl bg-4-blue hover:text-blue-600 hover:border-blue-600"
-                    type="submit"
+                    type="button"
                     onClick={createNewUser}
                   >
                     Continue
