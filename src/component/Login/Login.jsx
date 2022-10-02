@@ -1,22 +1,26 @@
-import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import Register from "../Register/Register";
-// import { auth } from "../../firebase/firebase-config";
+import React, { useEffect, useState } from "react";
 import FormLogin from "./FormLogin";
 import Logo from "./Logo";
 import NavBarLogin from "./NavBarLogin";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/firebase-config";
 
 function Login() {
   const [logoBig, setLogoBig] = useState(false);
-  const [currentUser, setCurrentUser] = useState({
-    email: null,
-    password: null,
+  const [currentUser, setCurrentUser] = useState([]);
+
+  //Status user
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        //user signIn succeed.
+        setCurrentUser(user);
+      } else {
+        //User is not sign-in
+        console.log("User is not sign-in");
+      }
+    });
   });
-
-  //Sign in
-  // const signInWithEmail = () => {
-
-  // }
 
   return (
     <div>
@@ -39,7 +43,7 @@ function Login() {
                 </div>
               </div>
               <div className="mt-32">
-                <FormLogin formLg={true}/>
+                <FormLogin formLg={true} />
               </div>
             </div>
           </div>
@@ -58,7 +62,7 @@ function Login() {
                 </p>
               </div>
               <div className="mt-3">
-                <FormLogin formLg={false}/>
+                <FormLogin formLg={false} />
               </div>
             </div>
           </div>

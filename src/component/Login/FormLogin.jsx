@@ -1,19 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase-config";
 
 function FormLogin({ formLg }) {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleValidation = () => {
+    if (email === "") {
+      alert("Please enter your email.");
+      return false;
+    } else if (password === "") {
+      alert("Please enter your password.");
+      return false;
+    }
+
+    return true;
+  };
+
+  //Sign in
+  const signInWithEmail = () => {
+    if (handleValidation() === true) {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((user) => {
+          console.log(user);
+        })
+        .catch((error) => error.message);
+
+      setEmail("");
+      setPassword("");
+      navigate("/profile");
+    }
+  };
 
   return (
     <div>
-      {! formLg ? (
+      {!formLg ? (
         <>
           <form className="text-center mr-auto ml-auto">
             <div className="mb-2">
               <input
                 className="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
-                placeholder="Username"
+                placeholder="Email"
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
               />
             </div>
             <div className="mb-4">
@@ -21,6 +55,9 @@ function FormLogin({ formLg }) {
                 className="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 type="password"
                 placeholder="******************"
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
               />
             </div>
             <div>
@@ -30,7 +67,11 @@ function FormLogin({ formLg }) {
             </div>
             <div className="m-5 space-y-4">
               <div>
-                <button className="bg-4-blue hover:bg-3-blue text-white w-80 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <button
+                  className="bg-4-blue hover:bg-3-blue text-white w-80 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  onClick={signInWithEmail}
+                  type="button"
+                >
                   Sign In
                 </button>
               </div>
@@ -89,7 +130,10 @@ function FormLogin({ formLg }) {
               <input
                 className="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
-                placeholder="Username"
+                placeholder="Email"
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
               />
             </div>
             <div className="mb-6">
@@ -97,6 +141,9 @@ function FormLogin({ formLg }) {
                 className="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 type="password"
                 placeholder="******************"
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
               />
             </div>
             <div>
@@ -105,7 +152,11 @@ function FormLogin({ formLg }) {
               </button>
             </div>
             <div className="m-5 space-y-4">
-              <button className="bg-4-blue hover:bg-3-blue text-white w-80 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              <button
+                className="bg-4-blue hover:bg-3-blue text-white w-80 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={signInWithEmail}
+                type="button"
+              >
                 Sign In
               </button>
             </div>
