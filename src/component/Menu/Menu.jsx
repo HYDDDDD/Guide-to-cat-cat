@@ -14,7 +14,7 @@ function Menu() {
       <div className="hidden bg-gradient-to-b from-3-blue via-2-blue to-white lg:fixed lg:mt-2 lg:block lg:w-64 lg:h-screen ">
         <div className="px-5 pt-5 text-xl font-semibold">Home</div>
         <button
-          className="bg-3-blue w-full mt-4 py-2 px-5 flex space-x-2"
+          className="w-full hover:bg-2-blue active:bg-3-blue mt-4 py-2 px-5 flex space-x-2"
           type="button"
           onClick={() => navigate("/profile")}
         >
@@ -25,7 +25,7 @@ function Menu() {
         </button>
 
         <button
-          className="w-full hover:bg-2-blue py-2 px-5 flex space-x-2"
+          className="w-full hover:bg-2-blue active:bg-3-blue py-2 px-5 flex space-x-2"
           type="button"
         >
           <div>
@@ -35,7 +35,7 @@ function Menu() {
         </button>
 
         <button
-          className="w-full hover:bg-2-blue py-2 px-5 flex space-x-5"
+          className="w-full hover:bg-2-blue active:bg-3-blue py-2 px-5 flex space-x-5"
           type="button"
           onClick={() => navigate("/chat")}
         >
@@ -46,7 +46,7 @@ function Menu() {
         </button>
 
         <button
-          className="w-full hover:bg-2-blue py-2 px-5 flex space-x-5"
+          className="w-full hover:bg-2-blue active:bg-3-blue py-2 px-5 flex space-x-5"
           type="button"
         >
           <div>
@@ -56,7 +56,7 @@ function Menu() {
         </button>
 
         <button
-          className="w-full hover:bg-2-blue py-2 px-5 flex space-x-5"
+          className="w-full hover:bg-2-blue active:bg-3-blue py-2 px-5 flex space-x-5"
           type="button"
         >
           <div>
