@@ -17,7 +17,7 @@ function Login() {
         setCurrentUser(user);
       } else {
         //User is not sign-in
-        console.log("User is not sign-in");
+        //console.log("User is not sign-in");
       }
     });
   });

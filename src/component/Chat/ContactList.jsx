@@ -4,7 +4,7 @@ import starBluePic from "../Picture/starBlue.png";
 
 function ContactList({ setShowChatBox }) {
   return (
-    <div>
+    <div className="">
       <div className="border-b border-black">
         <div className="text-2xl font-bold drop-shadow-lg shadow-black p-2 ml-5">
           Message
@@ -49,7 +49,7 @@ function ContactList({ setShowChatBox }) {
           <div className="flex lg:space-x-14">
             <div>
               <div className="font-bold">Mr.Prayut J-OCha</div>
-              <div className="ml-2">Message</div>
+              <div className="">Message</div>
             </div>
             <div className="flex flex-col justify-between">
               <div className="flex justify-end">
