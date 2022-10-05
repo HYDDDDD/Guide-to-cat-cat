@@ -5,7 +5,8 @@ import User from "./User";
 import StoryUser from "./StoryUser";
 import TreasuryLikes from "./TreasuryLikes";
 
-function Profile() {
+function Profile({currentUser}) {
+
   return (
     <div>
       <NavigationBar />
@@ -13,7 +14,7 @@ function Profile() {
         <div className="flex">
           <MenuBar />
           <div className="w-screen mt-16 py-2 lg:ml-64">
-            <User />
+            <User currentUser={currentUser}/>
             <StoryUser />
             <TreasuryLikes />
           </div>

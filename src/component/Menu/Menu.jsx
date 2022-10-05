@@ -27,6 +27,7 @@ function Menu() {
         <button
           className="w-full hover:bg-2-blue active:bg-3-blue py-2 px-5 flex space-x-2"
           type="button"
+          onClick={() => navigate("/post")}
         >
           <div>
             <img className="w-12 h-12" src={picPost} alt="" />

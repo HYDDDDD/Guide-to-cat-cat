@@ -36,7 +36,6 @@ function ChatBox(props) {
       ) : (
         <ScrollToBottom className="w-full h-full overflow-x-hidden bg-slate-600">
           {MessageList.map((doc) => {
-            // console.log(doc.data.imageUrl);
             // You
             if (props.currentUser.uid === doc.data.id) {
               return (

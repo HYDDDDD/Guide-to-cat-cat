@@ -1,30 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NavigationBar from "../Navigation_bar/NavigationBar";
 import MenuBar from "../Menu/Menu";
 import ContactList from "./ContactList";
 import ChatBox from "./ChatBox";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase/firebase-config";
 
-function Chat() {
+function Chat({ currentUser, statusSignIn }) {
   const [showChatBox, setShowChatBox] = useState(false);
-  const [currentUser, setCurrentUser] = useState([]);
-  const [statusSignIn, setStatusSignIn] = useState(false);
-
-  //Status user
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        //user signIn succeed.
-        setCurrentUser(user);
-        setStatusSignIn(true);
-      } else {
-        //User is not sign-in
-        //console.log("User is not sign-in");
-        setStatusSignIn(false);
-      }
-    });
-  });
 
   return (
     <div>
