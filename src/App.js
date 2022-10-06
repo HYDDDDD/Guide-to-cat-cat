@@ -32,7 +32,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/register" element={<Register currentUser={currentUser}/>} />
       <Route path="/profile" element={<Profile currentUser={currentUser} />} />
       <Route
         path="/chat"
