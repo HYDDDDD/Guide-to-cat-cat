@@ -15,7 +15,7 @@ function CommentPost() {
           <div>สามารถซื้อยามาใส่เองได้มั้ยครับ ?</div>
         </div>
       </div>
-      <div className="flex ml-14 space-x-2 bg-2-blue rounded w-5/6 h-fit">
+      <div className="flex ml-8 sm:ml-14 space-x-2 bg-2-blue rounded w-5/6 h-fit">
         <div className="p-1">
           <img src={ProfileDennis} alt="" />
         </div>
