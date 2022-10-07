@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-
 import FormRegister from "./FormRegister";
 
 function Register({ currentUser }) {
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
 
   return (
     <div className="lg:h-screen overflow-x-hidden bg-gradient-to-b from-4-blue via-3-blue/95 to-2-blue/80">

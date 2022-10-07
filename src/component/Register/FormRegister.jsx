@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { addDoc, serverTimestamp } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collectionTotalUser } from "../../firebase/firebase-collections";
 import { auth } from "../../firebase/firebase-config";
@@ -16,6 +16,7 @@ function FormRegister({ currentUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
+  const [statusCreate, setStatusCreate] = useState(false);
 
   const handleValidation = () => {
     if (name === "") {
@@ -58,20 +59,16 @@ function FormRegister({ currentUser }) {
     return true;
   };
 
+  useEffect(() => {
+    if (statusCreate === true) {
+      addUser();
+    }
+  });
+
   const createNewUser = async () => {
-    // await addUser();
     if (handleValidation() === true) {
       createUserWithEmailAndPassword(auth, email, password)
         .then(async (user) => {
-          //   await addDoc(collectionTotalUser, {
-          //     id: currentUser.uid,
-          //     name: currentUser.displayName,
-          //     profilePicUrl: currentUser.photoURL,
-          //     status: status,
-          //     timestamp: serverTimestamp(),
-          //   });
-          await addUser();
-
           await updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: ProfilePic,
@@ -80,15 +77,8 @@ function FormRegister({ currentUser }) {
         })
         .catch((error) => error.message);
 
-      setName("");
-      setBdate("");
-      setStatus("");
-      setGender("");
-      setEmail("");
-      setPassword("");
-      setPasswordAgain("");
+      setStatusCreate(true);
       alert("Successful registration.");
-      navigate("/");
     }
   };
 
@@ -101,9 +91,17 @@ function FormRegister({ currentUser }) {
         status: status,
         timestamp: serverTimestamp(),
       });
+      navigate("/");
     } catch (error) {
       console.error("Error add new user to Firebase Database", error);
     }
+    setName("");
+    setBdate("");
+    setStatus("");
+    setGender("");
+    setEmail("");
+    setPassword("");
+    setPasswordAgain("");
   };
 
   return (

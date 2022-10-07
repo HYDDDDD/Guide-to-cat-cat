@@ -17,7 +17,7 @@ function Chat({ currentUser, statusSignIn }) {
           <MenuBar />
           <div className="hidden relative sm:flex w-screen mt-16 py-2 lg:ml-64">
             <div className="sm:w-2/5 w-full border border-black">
-              <ContactList setShowChatBox={setShowChatBox} />
+              <ContactList setShowChatBox={setShowChatBox} currentUser={currentUser}/>
             </div>
             {showChatBox ? (
               <div className="sm:w-3/5">

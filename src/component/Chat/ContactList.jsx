@@ -2,7 +2,8 @@ import React from "react";
 import ProfilePicMrPrayut from "../Picture/profilePic-MrPrayut.png";
 import starBluePic from "../Picture/starBlue.png";
 
-function ContactList({ setShowChatBox }) {
+function ContactList({ setShowChatBox, currentUser }) {
+
   return (
     <div className="">
       <div className="border-b border-black">
@@ -48,7 +49,7 @@ function ContactList({ setShowChatBox }) {
           </div>
           <div className="flex lg:space-x-14">
             <div>
-              <div className="font-bold">Mr.Prayut J-OCha</div>
+              <div className="font-bold">Mr.B</div>
               <div className="">Message</div>
             </div>
             <div className="flex flex-col justify-between">

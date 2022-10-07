@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AddPostBar from "./AddPostBar";
 import btnPublic from "../Picture/btnPublicPost.png";
 import btnAlbum from "../Picture/btnAlbum.png";
@@ -10,9 +10,19 @@ import picLocation from "../Picture/LocationColor.png";
 import picMore from "../Picture/MoreColor.png";
 
 function AddPost({ currentUser }) {
+  const [showSelectFile, setShowSelectFile] = useState(false);
+  const [imageUpload, setImageUpload] = useState();
+  const [contentPost, setContentPost] = useState("");
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImageUpload(e.target.files[0]);
+    }
+  };
+
   return (
     <div>
-      <AddPostBar />
+      <AddPostBar currentUser={currentUser} imageUpload={imageUpload} contentPost={contentPost} setContentPost={setContentPost}/>
       <div>
         <div className="flex justify-center">
           <div className=" bg-1-blue h-full mt-24 rounded-xl">
@@ -25,7 +35,7 @@ function AddPost({ currentUser }) {
                 />
               </div>
               <div>
-                <div className="font-bold">Fern</div>
+                <div className="font-bold">{currentUser.displayName}</div>
                 <div className="flex">
                   <div>
                     <button className="text-4-blue font-bold rounded hover:text-blue-600 hover:border-blue-600">
@@ -43,17 +53,40 @@ function AddPost({ currentUser }) {
 
             {/* content post */}
             <div className="h-500px sm:h-80 px-5">
-              <div className="text-start text-sm break-all p-1">
-                คุณกำลังคิดอะไรอยู่
+              <div className="text-start text-sm h-full  p-1">
+                <textarea
+                  className="bg-transparent w-full resize-none h-full"
+                  type="text"
+                  placeholder="คุณกำลังคิดอะไรอยู่"
+                  onChange={(event) => {
+                    setContentPost(event.target.value);
+                  }}
+                />
               </div>
             </div>
             <div className="bottom-0 left-0 w-full mt-11">
               <div>
                 <img src={picBackgroundPic} alt="" />
               </div>
+              {showSelectFile ? (
+                <>
+                  <input
+                    type={"file"}
+                    className="mt-2"
+                    onChange={handleImageChange}
+                  />
+                </>
+              ) : (
+                <></>
+              )}
               <div className="flex justify-between h-20 bg-white border-t-2 shadow-lg rounded-t-lg mt-2 p-2">
                 <div className="mt-auto mb-auto">
-                  <img src={picColor} alt="" />
+                  <button
+                    className="py-2 px-4"
+                    onClick={() => setShowSelectFile((val) => !val)}
+                  >
+                    <img src={picColor} alt="" />
+                  </button>
                 </div>
                 <div className="mt-auto mb-auto">
                   <img src={picPerson} alt="" />

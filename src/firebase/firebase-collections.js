@@ -3,6 +3,7 @@ import { db } from "./firebase-config";
 
 export const collectionMessagesRef1 = collection(db, "messagesRoom1");
 export const collectionTotalUser = collection(db, "users");
+export const collectionPosts = collection(db, "posts");
 export const currentMessageQuery = query(
   collectionMessagesRef1,
   orderBy("timestamp", "asc"),
