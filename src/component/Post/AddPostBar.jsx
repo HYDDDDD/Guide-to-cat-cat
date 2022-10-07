@@ -1,30 +1,56 @@
 import React from "react";
 import btnPrev from "../Picture/previous 1.png";
 import { useNavigate } from "react-router-dom";
-import { addDoc, serverTimestamp } from "firebase/firestore";
+import { addDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { collectionPosts } from "../../firebase/firebase-collections";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../../firebase/firebase-config";
 
-function AddPostBar({ currentUser, imageUpload, contentPost, setContentPost }) {
+function AddPostBar({
+  currentUser,
+  imageUpload,
+  contentPost,
+  setContentPost,
+  setImageUpload,
+  setShowSelectFile,
+}) {
   const navigate = useNavigate();
 
-  // Saves a new post to Cloud Firestore.
-  const saveContentPost = async () => {
-    //Add a new post entry to the Firebase database.
+  const addPost = async () => {
     if (contentPost !== "") {
       try {
-        await addDoc(collectionPosts, {
+        const postRef = await addDoc(collectionPosts, {
           id: currentUser.uid,
           name: currentUser.displayName,
-          text: contentPost,
-          picturePost: imageUpload,
-          profilePicUrl: currentUser.photoURL,
+          photoURL: currentUser.photoURL,
+          contentPost: contentPost,
+          imagePost: null,
           timestamp: serverTimestamp(),
         });
+
+        const filePath = `${currentUser.uid}/${postRef.id}`;
+        const imagePostRef = ref(storage, filePath);
+        const fileSnapshot = await uploadBytesResumable(
+          imagePostRef,
+          imageUpload
+        );
+
+        const publicImageUrl = await getDownloadURL(imagePostRef);
+        await updateDoc(postRef, {
+          imagePost: publicImageUrl,
+          storageUrl: fileSnapshot.metadata.fullPath,
+        });
+
+        setImageUpload();
+        setShowSelectFile(false);
         setContentPost("");
+        alert("Successful add a post");
       } catch (error) {
-        console.error("Error writing new message to Firebase Database", error);
+        console.error("Error add new post to Firebase Database", error);
       }
     }
+
+    navigate("/post");
   };
 
   return (
@@ -43,7 +69,7 @@ function AddPostBar({ currentUser, imageUpload, contentPost, setContentPost }) {
           <div>
             <button
               className="text-4-blue font-bold px-4 py-2 rounded bg-G1-blue hover:text-blue-600 hover:border-blue-600"
-              onClick={saveContentPost}
+              onClick={addPost}
             >
               Post
             </button>

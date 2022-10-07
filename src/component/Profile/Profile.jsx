@@ -6,7 +6,6 @@ import StoryUser from "./StoryUser";
 import TreasuryLikes from "./TreasuryLikes";
 
 function Profile({currentUser}) {
-
   return (
     <div>
       <NavigationBar />

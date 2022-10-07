@@ -8,6 +8,8 @@ import picPerson from "../Picture/personColor.png";
 import picEmoji from "../Picture/EmojiColor.png";
 import picLocation from "../Picture/LocationColor.png";
 import picMore from "../Picture/MoreColor.png";
+import { addDoc, serverTimestamp } from "firebase/firestore";
+import { collectionPosts } from "../../firebase/firebase-collections";
 
 function AddPost({ currentUser }) {
   const [showSelectFile, setShowSelectFile] = useState(false);
@@ -20,9 +22,35 @@ function AddPost({ currentUser }) {
     }
   };
 
+  // const addPost = () => {
+  //   if (contentPost !== "") {
+  //     try {
+  //       addDoc(collectionPosts, {
+  //         id: currentUser.uid,
+  //         name: currentUser.displayName,
+  //         photoURL: currentUser.photoURL,
+  //         contentPost: contentPost,
+  //         imagePost: imageUpload,
+  //         timestamp: serverTimestamp(),
+  //       });
+  //     } catch (error) {
+  //       console.error("Error add new post to Firebase Database", error);
+  //     }
+  //   }
+  //   setContentPost("");
+  //   setImageUpload();
+  // };
+
   return (
     <div>
-      <AddPostBar currentUser={currentUser} imageUpload={imageUpload} contentPost={contentPost} setContentPost={setContentPost}/>
+      <AddPostBar
+        currentUser={currentUser}
+        imageUpload={imageUpload}
+        contentPost={contentPost}
+        setContentPost={setContentPost}
+        setImageUpload={setImageUpload}
+        setShowSelectFile={setShowSelectFile}
+      />
       <div>
         <div className="flex justify-center">
           <div className=" bg-1-blue h-full mt-24 rounded-xl">

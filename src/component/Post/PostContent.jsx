@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import btnMore from "../Picture/btnMore.png";
 import btnLike from "../Picture/like.png";
 import btnComment from "../Picture/comment.png";
 import PostPic1 from "../Picture/PostPic1.png";
 import CommentPost from "./CommentPost";
+import btnLikeRed from "../Picture/HeartRed.png";
 
 function PostContent({ currentUser }) {
+  const [clickLike, setClickLike] = useState(false);
+
   return (
     <div>
       <div className="flex justify-center mt-4">
@@ -41,7 +44,20 @@ function PostContent({ currentUser }) {
               <div>
                 <div className="text-center">99</div>
                 <div>
-                  <img src={btnLike} alt="" />
+                  <button
+                    onClick={() => setClickLike((val) => !val)}
+                    type="button"
+                  >
+                    {!clickLike ? (
+                      <>
+                        <img src={btnLike} alt="" />
+                      </>
+                    ) : (
+                      <>
+                        <img src={btnLikeRed} alt="" />
+                      </>
+                    )}
+                  </button>
                 </div>
               </div>
               <div>

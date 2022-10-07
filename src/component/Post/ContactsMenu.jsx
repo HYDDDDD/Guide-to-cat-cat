@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import sug1 from "../Picture/sug1.png";
 import btnMore from "../Picture/btnMore.png";
 import ProfileEric from "../Picture/profilePic-Eric.png";
@@ -6,59 +6,59 @@ import ProfileCynthia from "../Picture/profilePic-Cynthia.png";
 import ProfileDennis from "../Picture/profilePic-Dennis.png";
 import ProfilePop from "../Picture/profilePic-pop.png";
 import ProfileFern from "../Picture/ProfilePic-Fern.png";
+import { collectionTotalUser } from "../../firebase/firebase-collections";
+import { onSnapshot } from "firebase/firestore";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 function ContactsMenu() {
+  const [contactList, setContactList] = useState([]);
+
+  useEffect(() => {
+    loadContacts();
+  }, []);
+
+  const loadContacts = () => {
+    onSnapshot(collectionTotalUser, (response) => {
+      setContactList(
+        response.docs.map((contactName) => ({
+          id: contactName.id,
+          data: contactName.data(),
+        }))
+      );
+    });
+  };
+
   return (
-    <div className="fixed px-5 shadow-xl">
-      <div className="font-bold text-xl mt-5">Suggested</div>
-      <div>
-        <img src={sug1} alt="" />
-      </div>
-      <div className="flex justify-between mt-10">
-        <div className="font-bold text-xl">Contacts</div>
+    <div>
+      <div className="lg:fixed lg:px-5 p-4 h-screen shadow-xl">
+        <div className="font-bold text-xl mt-5">Suggested</div>
         <div>
-          <img src={btnMore} alt="" />
+          <img className="mr-auto ml-auto mt-2" src={sug1} alt="" />
         </div>
-      </div>
-      {/* persons */}
-      <div>
-        <div className="flex space-x-5 m-5">
+        <div className="flex justify-between mt-10">
+          <div className="font-bold text-xl">Contacts</div>
           <div>
-            <img src={ProfileEric} alt="" />
+            <img src={btnMore} alt="" />
           </div>
-          <div className="mt-auto mb-auto">Eric Jonse</div>
         </div>
-      </div>
-      <div>
-        <div className="flex space-x-5 m-5">
-          <div>
-            <img src={ProfileCynthia} alt="" />
-          </div>
-          <div className="mt-auto mb-auto">Cynthia lopez</div>
-        </div>
-      </div>
-      <div>
-        <div className="flex space-x-5 m-5">
-          <div>
-            <img className="w-16" src={ProfileDennis} alt="" />
-          </div>
-          <div className="mt-auto mb-auto">Dennis Han</div>
-        </div>
-      </div>
-      <div>
-        <div className="flex space-x-5 m-5">
-          <div>
-            <img src={ProfilePop} alt="" />
-          </div>
-          <div className="mt-auto mb-auto">Pop na</div>
-        </div>
-      </div>
-      <div>
-        <div className="flex space-x-5 m-5">
-          <div>
-            <img className="w-16" src={ProfileFern} alt="" />
-          </div>
-          <div className="mt-auto mb-auto">Fern</div>
+        {/* persons */}
+        <div>
+          <ScrollToBottom className="h-80">
+            {contactList.map((contacts) => {
+              return (
+                <div key={contacts.id}>
+                  <button className="flex w-32 space-x-5 m-5">
+                    <div>
+                      <img src={contacts.data.photoURL} alt="" />
+                    </div>
+                    <div className="w-full mt-auto mb-auto">
+                      {contacts.data.name}
+                    </div>
+                  </button>
+                </div>
+              );
+            })}
+          </ScrollToBottom>
         </div>
       </div>
     </div>

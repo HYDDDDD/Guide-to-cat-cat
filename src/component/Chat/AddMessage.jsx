@@ -57,8 +57,6 @@ function AddMessage(props) {
 
         //file name show in storage.
         const filePath = `${props.currentUser.uid}/${messageRef.id}`;
-        console.log("user id : ", props.currentUser.uid);
-        console.log("messageRef id : ", messageRef.id);
         // create reference to file
         const imageRef = ref(storage, filePath);
         //upload file and metadata.
