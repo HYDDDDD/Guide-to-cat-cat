@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import sug1 from "../Picture/sug1.png";
 import btnMore from "../Picture/btnMore.png";
-import ProfileEric from "../Picture/profilePic-Eric.png";
-import ProfileCynthia from "../Picture/profilePic-Cynthia.png";
-import ProfileDennis from "../Picture/profilePic-Dennis.png";
-import ProfilePop from "../Picture/profilePic-pop.png";
-import ProfileFern from "../Picture/ProfilePic-Fern.png";
 import { collectionTotalUser } from "../../firebase/firebase-collections";
 import { onSnapshot } from "firebase/firestore";
 import ScrollToBottom from "react-scroll-to-bottom";
+import { useNavigate } from "react-router-dom";
 
 function ContactsMenu() {
+  const navigate = useNavigate();
   const [contactList, setContactList] = useState([]);
 
   useEffect(() => {
@@ -47,7 +44,11 @@ function ContactsMenu() {
             {contactList.map((contacts) => {
               return (
                 <div key={contacts.id}>
-                  <button className="flex w-32 space-x-5 m-5">
+                  <button
+                    className="flex w-32 space-x-5 m-5"
+                    type="button"
+                    onClick={() => navigate("/chat")}
+                  >
                     <div>
                       <img src={contacts.data.photoURL} alt="" />
                     </div>

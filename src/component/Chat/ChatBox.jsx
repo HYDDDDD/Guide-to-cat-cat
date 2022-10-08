@@ -9,7 +9,6 @@ import DeleteMessage from "./DeleteMessage";
 
 function ChatBox(props) {
   const [MessageList, setMessageList] = useState([]);
-  const [showBtnMore, setShowBtnMore] = useState(false);
   const [idText, setIdText] = useState("");
 
   useEffect(() => {

@@ -14,7 +14,7 @@ function DeleteMessage(props) {
 
     if (props.imageUrl !== null) {
       //file name show in storage.
-      const filePath = `${props.user.currentUser.uid}/${props.idMessage}`;
+      const filePath = `${`Messages`}/${props.user.currentUser.uid}/${props.idMessage}`;
       // create reference to file
       const imageRef = ref(storage, filePath);
 

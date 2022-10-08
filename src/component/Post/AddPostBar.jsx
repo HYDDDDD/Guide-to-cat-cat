@@ -28,7 +28,7 @@ function AddPostBar({
           timestamp: serverTimestamp(),
         });
 
-        const filePath = `${currentUser.uid}/${postRef.id}`;
+        const filePath = `${`ContactPosts`}/${currentUser.uid}/${postRef.id}`;
         const imagePostRef = ref(storage, filePath);
         const fileSnapshot = await uploadBytesResumable(
           imagePostRef,

@@ -2,8 +2,8 @@ import React from "react";
 import ProfilePicMrPrayut from "../Picture/profilePic-MrPrayut.png";
 import starBluePic from "../Picture/starBlue.png";
 
-function ContactList({ setShowChatBox, currentUser }) {
-
+function ContactList({ setShowChatBox, contactList }) {
+  // const users = [contactList];
   return (
     <div className="">
       <div className="border-b border-black">
@@ -59,6 +59,27 @@ function ContactList({ setShowChatBox, currentUser }) {
               <div className="text-sm">12:20pm</div>
             </div>
           </div>
+          {/* {users.map((users) => {
+            return (
+              <div className="flex space-x-3">
+                <div>
+                  <img src={ProfilePicMrPrayut} alt="" />
+                </div>
+                <div className="flex lg:space-x-14">
+                  <div>
+                    <div className="font-bold">Mr.B</div>
+                    <div className="">Message</div>
+                  </div>
+                  <div className="flex flex-col justify-between">
+                    <div className="flex justify-end">
+                      <img src={starBluePic} alt="" />
+                    </div>
+                    <div className="text-sm">12:20pm</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })} */}
         </button>
       </div>
     </div>

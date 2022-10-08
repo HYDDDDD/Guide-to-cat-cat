@@ -8,8 +8,6 @@ import picPerson from "../Picture/personColor.png";
 import picEmoji from "../Picture/EmojiColor.png";
 import picLocation from "../Picture/LocationColor.png";
 import picMore from "../Picture/MoreColor.png";
-import { addDoc, serverTimestamp } from "firebase/firestore";
-import { collectionPosts } from "../../firebase/firebase-collections";
 
 function AddPost({ currentUser }) {
   const [showSelectFile, setShowSelectFile] = useState(false);
@@ -21,25 +19,6 @@ function AddPost({ currentUser }) {
       setImageUpload(e.target.files[0]);
     }
   };
-
-  // const addPost = () => {
-  //   if (contentPost !== "") {
-  //     try {
-  //       addDoc(collectionPosts, {
-  //         id: currentUser.uid,
-  //         name: currentUser.displayName,
-  //         photoURL: currentUser.photoURL,
-  //         contentPost: contentPost,
-  //         imagePost: imageUpload,
-  //         timestamp: serverTimestamp(),
-  //       });
-  //     } catch (error) {
-  //       console.error("Error add new post to Firebase Database", error);
-  //     }
-  //   }
-  //   setContentPost("");
-  //   setImageUpload();
-  // };
 
   return (
     <div>

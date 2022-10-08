@@ -4,7 +4,7 @@ import MenuBar from "../Menu/Menu";
 import ContactList from "./ContactList";
 import ChatBox from "./ChatBox";
 
-function Chat({ currentUser, statusSignIn }) {
+function Chat({ currentUser, statusSignIn, contactList }) {
   const [showChatBox, setShowChatBox] = useState(false);
 
   return (
@@ -17,7 +17,7 @@ function Chat({ currentUser, statusSignIn }) {
           <MenuBar />
           <div className="hidden relative sm:flex w-screen mt-16 py-2 lg:ml-64">
             <div className="sm:w-2/5 w-full border border-black">
-              <ContactList setShowChatBox={setShowChatBox} currentUser={currentUser}/>
+              <ContactList setShowChatBox={setShowChatBox} contactList={contactList}/>
             </div>
             {showChatBox ? (
               <div className="sm:w-3/5">

@@ -9,7 +9,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { auth } from "./firebase/firebase-config";
 import AddPost from "./component/Post/AddPost";
-import ContactsMenu from "./component/Post/ContactsMenu";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
@@ -44,7 +43,6 @@ function App() {
       />
       <Route path="/post" element={<Post currentUser={currentUser} />} />
       <Route path="/addPost" element={<AddPost currentUser={currentUser} />} />
-      <Route path="/contacts" element={<ContactsMenu />} />
     </Routes>
   );
 }

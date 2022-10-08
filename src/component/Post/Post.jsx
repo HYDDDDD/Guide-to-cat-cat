@@ -16,7 +16,7 @@ function Post({ currentUser }) {
             <div className="hidden sm:flex">
               <div className="sm:w-830px">
                 <AddBar currentUser={currentUser} />
-                <PostContent currentUser={currentUser} />
+                <PostContent currentUser={currentUser}/>
               </div>
               <div className="">
                 <ContactsMenu />
@@ -29,7 +29,6 @@ function Post({ currentUser }) {
                 <PostContent currentUser={currentUser} />
               </div>
             </div>
-
           </div>
         </div>
       </div>
