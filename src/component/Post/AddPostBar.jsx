@@ -19,6 +19,21 @@ function AddPostBar({
   const addPost = async () => {
     if (contentPost !== "") {
       try {
+        await addDoc(collectionPosts, {
+          id: currentUser.uid,
+          name: currentUser.displayName,
+          photoURL: currentUser.photoURL,
+          contentPost: contentPost,
+          imagePost: null,
+          timestamp: serverTimestamp(),
+        });
+      } catch (error) {
+        console.error("Error writing new message to Firebase Database", error);
+      }
+    }
+
+    if (imageUpload) {
+      try {
         const postRef = await addDoc(collectionPosts, {
           id: currentUser.uid,
           name: currentUser.displayName,
@@ -40,16 +55,15 @@ function AddPostBar({
           imagePost: publicImageUrl,
           storageUrl: fileSnapshot.metadata.fullPath,
         });
-
-        setImageUpload();
-        setShowSelectFile(false);
-        setContentPost("");
-        alert("Successful add a post");
       } catch (error) {
         console.error("Error add new post to Firebase Database", error);
       }
     }
 
+    setImageUpload();
+    setShowSelectFile(false);
+    setContentPost("");
+    alert("Successful add a post");
     navigate("/post");
   };
 

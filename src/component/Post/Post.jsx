@@ -19,7 +19,7 @@ function Post({ currentUser }) {
                 <PostContent currentUser={currentUser}/>
               </div>
               <div className="">
-                <ContactsMenu />
+                <ContactsMenu currentUser={currentUser}/>
               </div>
             </div>
 

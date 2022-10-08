@@ -13,7 +13,7 @@ function PostContent({ currentUser }) {
   const [postList, setPostList] = useState([]);
   const [idPost, setIdPost] = useState("");
   const [showBtnMore, setShowBtnMore] = useState(false);
-  const [timePost, setTimePost] = useState("");
+  const [showAdd, setShowAdd] = useState(false);
 
   useEffect(() => {
     loadPosts();
@@ -28,11 +28,6 @@ function PostContent({ currentUser }) {
           time: new Date(post.data().timestamp.seconds * 1000).toDateString(),
         }))
       );
-      // response.docs.map((post) => ({
-      //   id: post.id,
-      //   data: post.data(),
-      //   time: new Date(post.data().timestamp.seconds * 1000).toDateString(),
-      // }));
     });
   };
 
@@ -118,12 +113,12 @@ function PostContent({ currentUser }) {
                   <div>
                     <div className="text-center">3</div>
                     <div>
-                      <img src={btnComment} alt="" />
+                      <img src={btnComment} alt="" onClick={() => setShowAdd((val) => !val)}/>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <CommentPost />
+                  <CommentPost showAdd={showAdd} currentUser={currentUser}/>
                 </div>
               </div>
             </div>
