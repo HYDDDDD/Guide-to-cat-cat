@@ -1,8 +1,8 @@
 import React from "react";
-import iconCart from "../Picture/iconCart.png";
-import btnBack from "../Picture/back.png";
+import iconCart from "../../Picture/iconCart.png";
+import btnBack from "../../Picture/back.png";
 
-function Vaccine({ setStatusNavigate }) {
+function Cart({ setStatusNavigate }) {
   return (
     <div className="flex justify-center mt-10">
       <div className="sm:w-4/6 space-y-10 sm:space-y-16 p-4 sm:p-7 border-12 rounded-3xl border-4-blue">
@@ -10,7 +10,7 @@ function Vaccine({ setStatusNavigate }) {
           <button type="button" onClick={() => setStatusNavigate("selectItem")}>
             <img src={btnBack} alt="" />
           </button>
-          Vaccine
+          Cart
         </div>
         <div className="flex justify-between space-x-10">{/*  */}</div>
         <div>
@@ -25,4 +25,4 @@ function Vaccine({ setStatusNavigate }) {
   );
 }
 
-export default Vaccine;
+export default Cart;

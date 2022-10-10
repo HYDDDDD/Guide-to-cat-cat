@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import NavigationBar from "../Navigation_bar/NavigationBar";
 import MenuBar from "../Menu/Menu";
 import SelectItem from "./SelectItem";
-import Food from "./Food";
-import CatLitter from "./CatLitter";
-import Toy from "./Toy";
-import Vaccine from "./Vaccine";
-import Snack from "./Snack";
-import Other from "./Other";
-import Cart from "./Cart";
+import Food from "./Food/Food";
+import CatLitter from "./CatLitter/CatLitter";
+import Toy from "./Toy/Toy";
+import Vaccine from "./Vaccine/Vaccine";
+import Snack from "./Snack/Snack";
+import Other from "./Other/Other";
+import Cart from "./Cart/Cart";
+import Kitten from "./Food/Kitten";
 
 function Calculate() {
   const [statusNavigate, setStatusNavigate] = useState("selectItem");
@@ -80,7 +81,19 @@ function Calculate() {
                                               />
                                             </>
                                           ) : (
-                                            <></>
+                                            <>
+                                              {statusNavigate === "kitten" ? (
+                                                <>
+                                                  <Kitten
+                                                    setStatusNavigate={
+                                                      setStatusNavigate
+                                                    }
+                                                  />
+                                                </>
+                                              ) : (
+                                                <></>
+                                              )}
+                                            </>
                                           )}
                                         </>
                                       )}

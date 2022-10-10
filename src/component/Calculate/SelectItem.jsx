@@ -10,7 +10,7 @@ import iconCart from "../Picture/iconCart.png";
 function SelectItem({ setStatusNavigate }) {
   return (
     <div className="flex justify-center mt-10">
-      <div className="sm:w-4/6 space-y-10 sm:space-y-16 p-4 sm:p-7 border-12 rounded-3xl border-4-blue">
+      <div className="sm:w-4/6 space-y-10 sm:space-y-16 p-4 sm:p-7 lg:border-12 lg:rounded-3xl lg:border-4-blue">
         <div className="flex justify-between space-x-10">
           <button type="button" onClick={() => setStatusNavigate("food")}>
             <div>
@@ -54,7 +54,7 @@ function SelectItem({ setStatusNavigate }) {
         <div>
           <div className="flex justify-end">
             <button type="button" onClick={() => setStatusNavigate("cart")}>
-              <img className="sm:w-full w-20" src={iconCart} alt="" />
+              <img className="sm:w-28 w-20" src={iconCart} alt="" />
             </button>
           </div>
         </div>
