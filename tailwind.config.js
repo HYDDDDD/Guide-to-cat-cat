@@ -20,6 +20,10 @@ module.exports = {
       height: {
         "500px": "500px",
       },
+      borderWidth: {
+        DEFAULT: '1px',
+        '12': '12px',
+      }
     },
   },
   plugins: [],

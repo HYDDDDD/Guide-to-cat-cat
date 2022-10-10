@@ -11,6 +11,13 @@ import { auth } from "./firebase/firebase-config";
 import AddPost from "./component/Post/AddPost";
 import Calculate from "./component/Calculate/Calculate";
 import Setting from "./component/Setting/Setting";
+import Food from "./component/Calculate/Food";
+import CatLitter from "./component/Calculate/CatLitter";
+import Toy from "./component/Calculate/Toy";
+import Vaccine from "./component/Calculate/Vaccine";
+import Snack from "./component/Calculate/Snack";
+import Other from "./component/Calculate/Other";
+import Cart from "./component/Calculate/Cart";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
@@ -47,6 +54,13 @@ function App() {
       <Route path="/addPost" element={<AddPost currentUser={currentUser} />} />
       <Route path="/calculate" element={<Calculate />} />
       <Route path="/setting" element={<Setting />} />
+      <Route path="/food" element={<Food />} />
+      <Route path="/catLitter" element={<CatLitter />} />
+      <Route path="/toy" element={<Toy />} />
+      <Route path="/vaccine" element={<Vaccine />} />
+      <Route path="/snack" element={<Snack />} />
+      <Route path="/other" element={<Other />} />
+      <Route path="/cart" element={<Cart />} />
     </Routes>
   );
 }

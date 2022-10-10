@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { addDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { collectionMessagesRef1 } from "../../firebase/firebase-collections";
-import Picker from "emoji-picker-react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../firebase/firebase-config";
 
@@ -134,14 +133,14 @@ function AddMessage(props) {
           </>
         )}
       </div>
-      {showPicker && (
+      {/* {showPicker && (
         <>
           <Picker
             pickerStyle={{ width: "100%", height: "400px" }}
             onEmojiClick={onEmojiClick}
           />
         </>
-      )}
+      )} */}
       {showSelectFile ? (
         <>
           <input type={"file"} onChange={handleImageChange} />
