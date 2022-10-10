@@ -12,3 +12,12 @@ export const collectionTotalUser = collection(db, "users");
 
 export const collectionPosts = collection(db, "posts");
 export const postsQuery = query(collectionPosts, orderBy("timestamp", "desc"));
+
+export const collectionComments = collection(db, "comments");
+export const commentQuery = query(
+  collectionComments,
+  orderBy("timestamp", "asc"),
+  limit(12)
+);
+
+export const collectionLike = collection(db, "likes");

@@ -5,7 +5,7 @@ function User({ currentUser }) {
 
   return (
     <div>
-      <div className="flex justify-center space-x-3 lg:space-x-5 mt-5">
+      <div className="flex justify-center lg:space-x-5 mt-5">
         <div>
           <img
             className="px-2"
@@ -14,7 +14,7 @@ function User({ currentUser }) {
           />
         </div>
         <div className="mt-3 sm:mt-5 sm:space-y-5">
-          <div className="flex space-x-20 sm:space-x-28">
+          <div className="flex space-x-10 sm:space-x-28">
             <div className="text-xl font-bold">{currentUser.displayName}</div>
             <div className="flex sm:space-x-5">
               <div>

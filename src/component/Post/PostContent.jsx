@@ -4,8 +4,17 @@ import btnLike from "../Picture/like.png";
 import btnComment from "../Picture/comment.png";
 import CommentPost from "./CommentPost";
 import btnLikeRed from "../Picture/HeartRed.png";
-import { onSnapshot } from "firebase/firestore";
-import { postsQuery } from "../../firebase/firebase-collections";
+import {
+  addDoc,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
+import {
+  collectionLike,
+  postsQuery,
+} from "../../firebase/firebase-collections";
 import DeletePost from "./DeletePost";
 
 function PostContent({ currentUser }) {
@@ -17,6 +26,10 @@ function PostContent({ currentUser }) {
 
   useEffect(() => {
     loadPosts();
+
+    // if (clickLike === true) {
+    //   addPostLike();
+    // }
   }, []);
 
   const loadPosts = () => {
@@ -31,6 +44,30 @@ function PostContent({ currentUser }) {
     });
   };
 
+  // const addPostLike = async () => {
+  //   if (clickLike === true && idPost !== "") {
+  //     console.log(clickLike);
+  //     console.log(idPost);
+  //     try {
+  //       await addDoc(collectionLike, {
+  //         id: currentUser.uid,
+  //         idPost: idPost,
+  //         name: currentUser.displayName,
+  //         photoURL: currentUser.photoURL,
+  //         timestamp: serverTimestamp(),
+  //       });
+  //     } catch (error) {
+  //       console.error("Error writing new message to Firebase Database", error);
+  //     }
+  //   }
+  // };
+
+  // const delPostLike = async (id) => {
+  //   console.log(id);
+  //   const docRef = doc(collectionLike, id);
+  //   await deleteDoc(docRef);
+  // };
+
   return (
     <div>
       <div className="mt-4">
@@ -39,12 +76,13 @@ function PostContent({ currentUser }) {
             <div
               key={post.id}
               className="bg-1-blue mt-5 ml-auto mr-auto w-11/12 sm:w-3/4 h-fit rounded-lg"
+              onClick={() => setIdPost(post.id)}
             >
               <div className="flex justify-between">
                 <div className="flex space-x-2">
                   <div className="mt-auto mb-auto">
                     <img
-                      className="p-2 w-20"
+                      className="p-2 sm:w-20 w-14"
                       src={post.data.photoURL}
                       alt="profile_picture"
                     />
@@ -94,17 +132,51 @@ function PostContent({ currentUser }) {
                   <div>
                     <div className="text-center">99</div>
                     <div>
-                      <button
-                        onClick={() => setClickLike((val) => !val)}
-                        type="button"
-                      >
-                        {!clickLike ? (
+                      <button onClick={() => setClickLike(true)} type="button">
+                        {/* {!clickLike ? (
                           <>
-                            <img src={btnLike} alt="" />
+                            <img
+                              src={btnLike}
+                              alt=""
+                              // onClick={() => addPostLike}
+                            />
                           </>
                         ) : (
                           <>
-                            <img src={btnLikeRed} alt="" />
+                            {idPost === post.id ? (
+                              <>
+                                <img
+                                  src={btnLikeRed}
+                                  alt=""
+                                  // onClick={() => delPostLike(post.id)}
+                                />
+                              </>
+                            ) : (
+                              <>
+                                <img src={btnLike} alt="" />
+                              </>
+                            )}
+                          </>
+                        )} */}
+                        {clickLike ? (
+                          <>
+                            {idPost === post.id ? (
+                              <>
+                                <img
+                                  src={btnLikeRed}
+                                  alt=""
+                                  // onClick={() => delPostLike(post.id)}
+                                />
+                              </>
+                            ) : (
+                              <>
+                                <img src={btnLike} alt="" />
+                              </>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <img src={btnLike} alt="" />
                           </>
                         )}
                       </button>
@@ -113,12 +185,27 @@ function PostContent({ currentUser }) {
                   <div>
                     <div className="text-center">3</div>
                     <div>
-                      <img src={btnComment} alt="" onClick={() => setShowAdd((val) => !val)}/>
+                      <img
+                        src={btnComment}
+                        alt=""
+                        onClick={() => setShowAdd((val) => !val)}
+                      />
                     </div>
                   </div>
                 </div>
+
                 <div>
-                  <CommentPost showAdd={showAdd} currentUser={currentUser}/>
+                  {idPost === post.id ? (
+                    <>
+                      <CommentPost
+                        showAdd={showAdd}
+                        currentUser={currentUser}
+                        idPost={idPost}
+                      />
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
             </div>

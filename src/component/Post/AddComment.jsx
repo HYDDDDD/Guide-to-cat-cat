@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { addDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { collectionPosts } from "../../firebase/firebase-collections";
+import { collectionComments } from "../../firebase/firebase-collections";
 import { storage } from "../../firebase/firebase-config";
 
-function AddComment({ showAdd, currentUser }) {
+function AddComment({ showAdd, currentUser, idPost }) {
   const [currentComment, setCurrentComment] = useState("");
   const [imageUpload, setImageUpload] = useState();
 
   const saveComment = async () => {
-    if (currentComment !== "") {
+    if (currentComment !== "" && idPost !== "") {
       try {
-        await addDoc(collectionPosts, {
+        await addDoc(collectionComments, {
           id: currentUser.uid,
+          idPost: idPost,
           name: currentUser.displayName,
           imageUrl: null,
           text: currentComment,
@@ -28,7 +29,7 @@ function AddComment({ showAdd, currentUser }) {
     if (imageUpload) {
       try {
         //add message
-        const commentRef = await addDoc(collectionPosts, {
+        const commentRef = await addDoc(collectionComments, {
           id: currentUser.uid,
           name: currentUser.displayName,
           imageUrl: null,
@@ -68,7 +69,7 @@ function AddComment({ showAdd, currentUser }) {
           <div>
             <input
               type="text"
-              className="bg-white appearance-none border-2 border-gray-200 rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 "
+              className="bg-2-blue appearance-none border-2 border-gray-200 rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 "
               value={currentComment}
               onChange={(event) => {
                 setCurrentComment(event.target.value);

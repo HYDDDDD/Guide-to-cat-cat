@@ -7,7 +7,7 @@ function NavigationBar() {
   const navigate = useNavigate();
   return (
     <div>
-      <div className="fixed bg-4-blue font-sans w-full m-0">
+      <div className="fixed z-10 bg-4-blue font-sans w-full m-0">
         <div className="container mx-auto">
           <div className="flex items-center justify-between py-2">
             <div className="flex items-center">

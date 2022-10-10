@@ -49,6 +49,7 @@ function Menu() {
         <button
           className="w-full hover:bg-2-blue active:bg-3-blue py-2 px-5 flex space-x-5"
           type="button"
+          onClick={() => navigate("/calculate")}
         >
           <div>
             <img className="w-12 h-12" src={picCalculate} alt="" />
@@ -59,6 +60,7 @@ function Menu() {
         <button
           className="w-full hover:bg-2-blue active:bg-3-blue py-2 px-5 flex space-x-5"
           type="button"
+          onClick={() => navigate("/setting")}
         >
           <div>
             <img className="w-12 h-12" src={picSetting} alt="" />
@@ -67,20 +69,20 @@ function Menu() {
         </button>
       </div>
 
-      <div className="flex justify-center space-x-10 p-2 bg-3-blue fixed bottom-0 left-0 w-full lg:hidden ">
-        <button type="button">
+      <div className="flex z-10 justify-center space-x-10 p-2 bg-3-blue fixed bottom-0 left-0 w-full lg:hidden ">
+        <button type="button" onClick={() => navigate("/profile")}>
           <img className="w-12 h-12" src={picProfile} alt="" />
         </button>
-        <button type="button">
+        <button type="button" onClick={() => navigate("/post")}>
           <img className="w-12 h-12" src={picPost} alt="" />
         </button>
-        <button type="button">
+        <button type="button" onClick={() => navigate("/chat")}>
           <img className="w-12 h-12" src={picMessage} alt="" />
         </button>
-        <button type="button">
+        <button type="button" onClick={() => navigate("/calculate")}>
           <img className="w-12 h-12" src={picCalculate} alt="" />
         </button>
-        <button type="button">
+        <button type="button" onClick={() => navigate("/setting")}>
           <img className="w-12 h-12" src={picSetting} alt="" />
         </button>
       </div>
