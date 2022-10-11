@@ -16,14 +16,16 @@ module.exports = {
       },
       width: {
         "830px": "830px",
+        "75px": "75px",
+        "76px": "76px",
       },
       height: {
         "500px": "500px",
       },
       borderWidth: {
-        DEFAULT: '1px',
-        '12': '12px',
-      }
+        DEFAULT: "1px",
+        12: "12px",
+      },
     },
   },
   plugins: [],

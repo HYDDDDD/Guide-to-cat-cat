@@ -9,7 +9,6 @@ import Vaccine from "./Vaccine/Vaccine";
 import Snack from "./Snack/Snack";
 import Other from "./Other/Other";
 import Cart from "./Cart/Cart";
-import Kitten from "./Food/Kitten";
 
 function Calculate() {
   const [statusNavigate, setStatusNavigate] = useState("selectItem");
@@ -81,19 +80,7 @@ function Calculate() {
                                               />
                                             </>
                                           ) : (
-                                            <>
-                                              {statusNavigate === "kitten" ? (
-                                                <>
-                                                  <Kitten
-                                                    setStatusNavigate={
-                                                      setStatusNavigate
-                                                    }
-                                                  />
-                                                </>
-                                              ) : (
-                                                <></>
-                                              )}
-                                            </>
+                                            <></>
                                           )}
                                         </>
                                       )}
