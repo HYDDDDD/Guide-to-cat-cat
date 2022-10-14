@@ -70,6 +70,7 @@ function ConfirmItem(props) {
           {ProductList.filter(
             (productId) => props.productId === productId.id
           ).map((products) => {
+            console.log(products);
             return (
               <div key={products.id} className="w-1/2">
                 <div>

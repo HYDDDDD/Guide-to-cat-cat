@@ -38,7 +38,7 @@ function MotherCat({ setStatusNavigate, setStatusFood }) {
         </div>
         <div className="space-y-10">
           {ProductList.filter((products) => products.data.type === "food")
-            .filter((products) => products.data.typeFood === "motherCat")
+            .filter((products) => products.data.typeFood === "mother")
             .map((products) => {
               return (
                 <div

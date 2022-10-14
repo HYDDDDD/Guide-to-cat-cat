@@ -113,11 +113,11 @@ function Cart(props) {
                 </div>
               );
             })} */}
-          {ProductList.filter(
+          {/* {ProductList.filter(
             (products) => products.data.id === props.currentUser
           ).map((products) => {
             console.log(products);
-          })}
+          })} */}
         </div>
         <div>
           <div className="flex justify-end">

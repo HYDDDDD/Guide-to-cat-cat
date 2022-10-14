@@ -42,7 +42,7 @@ function OldCat({ setStatusNavigate, setStatusFood }) {
         </div>
         <div className="space-y-10">
           {ProductList.filter((products) => products.data.type === "food")
-            .filter((products) => products.data.typeFood === "oldCat")
+            .filter((products) => products.data.typeFood === "old")
             .map((products) => {
               return (
                 <div

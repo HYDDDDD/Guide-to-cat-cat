@@ -55,7 +55,7 @@ function Food(props) {
                 <button
                   className="bg-G1-blue sm:ml-12 sm:w-5/6 w-full flex justify-between rounded-md p-5 shadow-lg border"
                   type="button"
-                  onClick={() => setStatusFood("oldCat")}
+                  onClick={() => setStatusFood("old")}
                 >
                   <div className="font-bold text-justify">
                     อาหารสำหรับแมวที่มีอายุ 7 ปีขึ้นไป
@@ -67,7 +67,7 @@ function Food(props) {
                 <button
                   className="bg-G1-blue sm:ml-12 sm:w-5/6 w-full flex justify-between rounded-md p-5 shadow-lg border"
                   type="button"
-                  onClick={() => setStatusFood("motherCat")}
+                  onClick={() => setStatusFood("mother")}
                 >
                   <div className="font-bold text-justify">
                     อาหารสำหรับแมวท้อง
@@ -111,7 +111,7 @@ function Food(props) {
                 </>
               ) : (
                 <>
-                  {statusFood === "oldCat" ? (
+                  {statusFood === "old" ? (
                     <>
                       <OldCat
                         setStatusNavigate={props.setStatusNavigate}
@@ -120,7 +120,7 @@ function Food(props) {
                     </>
                   ) : (
                     <>
-                      {statusFood === "motherCat" ? (
+                      {statusFood === "mother" ? (
                         <>
                           <MotherCat
                             setStatusNavigate={props.setStatusNavigate}
