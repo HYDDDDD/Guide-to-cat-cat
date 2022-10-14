@@ -10,6 +10,8 @@ import Snack from "./Snack/Snack";
 import Other from "./Other/Other";
 import Cart from "./Cart/Cart";
 import ConfirmItem from "./ConfirmItem";
+import { addDoc, serverTimestamp } from "firebase/firestore";
+import { collectionCart } from "../../firebase/firebase-collections";
 
 function Calculate({ currentUser }) {
   const [statusNavigate, setStatusNavigate] = useState("selectItem");
@@ -28,17 +30,14 @@ function Calculate({ currentUser }) {
     }
   }, []);
 
-  // const addItem
-
-  // const addPost = async () => {
-  //   if (contentPost !== "") {
+  // const addCart = async () => {
+  //   if (productId !== "") {
   //     try {
-  //       await addDoc(collectionPosts, {
+  //       await addDoc(collectionCart, {
   //         id: currentUser.uid,
   //         name: currentUser.displayName,
-  //         photoURL: currentUser.photoURL,
-  //         contentPost: contentPost,
-  //         imagePost: null,
+  //         productId: productId,
+  //         productWeight: productWeight,
   //         timestamp: serverTimestamp(),
   //       });
   //     } catch (error) {
@@ -46,39 +45,9 @@ function Calculate({ currentUser }) {
   //     }
   //   }
 
-  //   if (imageUpload) {
-  //     try {
-  //       const postRef = await addDoc(collectionPosts, {
-  //         id: currentUser.uid,
-  //         name: currentUser.displayName,
-  //         photoURL: currentUser.photoURL,
-  //         contentPost: contentPost,
-  //         imagePost: null,
-  //         timestamp: serverTimestamp(),
-  //       });
-
-  //       const filePath = `${`ContactPosts`}/${currentUser.uid}/${postRef.id}`;
-  //       const imagePostRef = ref(storage, filePath);
-  //       const fileSnapshot = await uploadBytesResumable(
-  //         imagePostRef,
-  //         imageUpload
-  //       );
-
-  //       const publicImageUrl = await getDownloadURL(imagePostRef);
-  //       await updateDoc(postRef, {
-  //         imagePost: publicImageUrl,
-  //         storageUrl: fileSnapshot.metadata.fullPath,
-  //       });
-  //     } catch (error) {
-  //       console.error("Error add new post to Firebase Database", error);
-  //     }
-  //   }
-
-  //   setImageUpload();
-  //   setShowSelectFile(false);
-  //   setContentPost("");
-  //   alert("Successful add a post");
-  //   navigate("/post");
+  //   setProductId("");
+  //   setProductWeight("");
+  //   alert("Successful add a cart");
   // };
 
   return (
@@ -153,6 +122,9 @@ function Calculate({ currentUser }) {
                                                 setStatusNavigate={
                                                   setStatusNavigate
                                                 }
+                                                productId={productId}
+                                                productWeight={productWeight}
+                                                currentUser={currentUser}
                                               />
                                             </>
                                           ) : (
@@ -165,15 +137,7 @@ function Calculate({ currentUser }) {
                                                       setStatusNavigate
                                                     }
                                                     productId={productId}
-                                                    // productName={productName}
-                                                    // productPic={productPic}
-                                                    // productDescription={
-                                                    //   productDescription
-                                                    // }
-                                                    // productWeight={
-                                                    //   productWeight
-                                                    // }
-                                                    // productPrice={productPrice}
+                                                    currentUser={currentUser}
                                                   />
                                                 </>
                                               ) : (

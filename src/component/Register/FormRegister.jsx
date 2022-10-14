@@ -18,6 +18,15 @@ function FormRegister({ currentUser }) {
   const [passwordAgain, setPasswordAgain] = useState("");
   const [statusCreate, setStatusCreate] = useState(false);
 
+  const validateEmail = (input) => {
+    const email = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    if (email.test(input)) {
+      return 0;
+    } else {
+      return 1;
+    }
+  };
+
   const handleValidation = () => {
     if (name === "") {
       alert("Please enter your name.");
@@ -53,6 +62,11 @@ function FormRegister({ currentUser }) {
 
     if (password.length < 6) {
       alert("Password should be at least 6 characters.");
+      return false;
+    }
+
+    if (validateEmail(email) === 1) {
+      alert("You entered an invalid email address.");
       return false;
     }
 
@@ -114,6 +128,7 @@ function FormRegister({ currentUser }) {
           <input
             className="shadow appearance-none border rounded-full w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
+            placeholder="Name"
             onChange={(event) => {
               setName(event.target.value);
             }}
@@ -126,6 +141,7 @@ function FormRegister({ currentUser }) {
           <input
             className="shadow appearance-none border rounded-full w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
+            placeholder="1/1/2565"
             onChange={(event) => {
               setBdate(event.target.value);
             }}
@@ -138,6 +154,7 @@ function FormRegister({ currentUser }) {
           <input
             className="shadow appearance-none border rounded-full w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
+            placeholder="M or F"
             onChange={(event) => {
               setGender(event.target.value);
             }}
@@ -147,7 +164,8 @@ function FormRegister({ currentUser }) {
           <label className="tracking-wide font-medium mb-1 ml-5">Email</label>
           <input
             className="shadow appearance-none border rounded-full w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="email"
+            type={"email"}
+            placeholder="example@gmail.com"
             onChange={(event) => {
               setEmail(event.target.value);
             }}
@@ -160,6 +178,7 @@ function FormRegister({ currentUser }) {
           <input
             className="shadow appearance-none border rounded-full w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="password"
+            placeholder="*********"
             onChange={(event) => {
               setPassword(event.target.value);
             }}
@@ -167,11 +186,12 @@ function FormRegister({ currentUser }) {
         </div>
         <div className="md:w-1/2 px-3">
           <label className="tracking-wide font-medium mb-1 ml-5">
-            Password again
+            Confirm password
           </label>
           <input
             className="shadow appearance-none border rounded-full w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="password"
+            placeholder="*********"
             onChange={(event) => {
               setPasswordAgain(event.target.value);
             }}

@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
-import iconCart from "../../component/Picture/iconCart.png";
 import btnBack from "../../component/Picture/back.png";
-import cart from "../../component/Picture/cart.png";
-import { onSnapshot } from "firebase/firestore";
-import { collectionProducts } from "../../firebase/firebase-collections";
+import { addDoc, onSnapshot, serverTimestamp } from "firebase/firestore";
+import {
+  collectionCart,
+  collectionProducts,
+} from "../../firebase/firebase-collections";
 import { v4 as uuidv4 } from "uuid";
 
 function ConfirmItem(props) {
   const [ProductList, setProductList] = useState([]);
   const [selectedWeight, setSelectedWeight] = useState("");
+  const [id, setId] = useState("");
 
   useEffect(() => {
     loadProducts();
+    loadWeight();
   }, []);
 
   //load products
@@ -24,6 +27,31 @@ function ConfirmItem(props) {
         }))
       );
     });
+  };
+
+  const loadWeight = () => {
+    if (selectedWeight) {
+      console.log(selectedWeight);
+    }
+  };
+
+  const addCart = async () => {
+    if (id !== "") {
+      try {
+        await addDoc(collectionCart, {
+          id: props.currentUser.uid,
+          name: props.currentUser.displayName,
+          productId: id,
+          productWeight: selectedWeight,
+          timestamp: serverTimestamp(),
+        });
+      } catch (error) {
+        console.error("Error writing new message to Firebase Database", error);
+      }
+    }
+
+    setId("");
+    setSelectedWeight("");
   };
 
   return (
@@ -61,15 +89,21 @@ function ConfirmItem(props) {
                   </div>
                   <div className="flex space-x-2 mt-10">
                     {products.data.weight.map((weight) => {
-                      console.log(weight);
                       return (
                         <div key={uuidv4()}>
                           <button
                             className="bg-3-blue w-20 px-5 py-1 rounded-md"
                             type="button"
                             onClick={() => {
-                              if (weight) {
-                                setSelectedWeight(weight);
+                              for (
+                                let index = 0;
+                                index < products.data.weight.length;
+                                index++
+                              ) {
+                                if (products.data.weight[index] === weight) {
+                                  setId(props.productId);
+                                  setSelectedWeight(index);
+                                }
                               }
                             }}
                           >
@@ -83,31 +117,7 @@ function ConfirmItem(props) {
                   </div>
                   <div className="flex justify-between mt-10 font-bold text-lg">
                     <div>ราคา</div>
-                    <div>
-                      {selectedWeight === "400g" ? (
-                        <>{products.data.price[0]} บาท</>
-                      ) : (
-                        <>
-                          {selectedWeight === "1.1kg" ? (
-                            <>{products.data.price[1]} บาท</>
-                          ) : (
-                            <>
-                              {selectedWeight === "2.8kg" ? (
-                                <>{products.data.price[2]} บาท</>
-                              ) : (
-                                <>
-                                  {selectedWeight === "6.8kg" ? (
-                                    <>{products.data.price[3]} บาท</>
-                                  ) : (
-                                    <></>
-                                  )}
-                                </>
-                              )}
-                            </>
-                          )}
-                        </>
-                      )}
-                    </div>
+                    <div>{products.data.price[selectedWeight]} บาท</div>
                   </div>
                 </div>
               </div>
@@ -118,6 +128,10 @@ function ConfirmItem(props) {
           <button
             className="bg-3-blue text-white w-32 px-5 py-2 rounded-md"
             type="button"
+            onClick={() => {
+              addCart();
+              props.setStatusNavigate("cart");
+            }}
           >
             ยืนยันสินค้า
           </button>
