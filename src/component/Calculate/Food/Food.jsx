@@ -7,7 +7,7 @@ import Cat from "./Cat";
 import OldCat from "./OldCat";
 import MotherCat from "./MotherCat";
 
-function Food({ setStatusNavigate }) {
+function Food(props) {
   const [statusFood, setStatusFood] = useState("food");
 
   return (
@@ -20,7 +20,7 @@ function Food({ setStatusNavigate }) {
                 <div>
                   <button
                     type="button"
-                    onClick={() => setStatusNavigate("selectItem")}
+                    onClick={() => props.setStatusNavigate("selectItem")}
                   >
                     <img src={btnBack} alt="" />
                   </button>
@@ -81,7 +81,7 @@ function Food({ setStatusNavigate }) {
                 <div className="flex justify-end mt-10">
                   <button
                     type="button"
-                    onClick={() => setStatusNavigate("cart")}
+                    onClick={() => props.setStatusNavigate("cart")}
                   >
                     <img className="sm:w-28 w-20" src={iconCart} alt="" />
                   </button>
@@ -95,7 +95,8 @@ function Food({ setStatusNavigate }) {
           {statusFood === "kitten" ? (
             <>
               <Kitten
-                setStatusNavigate={setStatusNavigate}
+                // setStatusNavigate={props.setStatusNavigate}
+                setProduct={props}
                 setStatusFood={setStatusFood}
               />
             </>
@@ -104,7 +105,7 @@ function Food({ setStatusNavigate }) {
               {statusFood === "cat" ? (
                 <>
                   <Cat
-                    setStatusNavigate={setStatusNavigate}
+                    setStatusNavigate={props.setStatusNavigate}
                     setStatusFood={setStatusFood}
                   />
                 </>
@@ -113,7 +114,7 @@ function Food({ setStatusNavigate }) {
                   {statusFood === "oldCat" ? (
                     <>
                       <OldCat
-                        setStatusNavigate={setStatusNavigate}
+                        setStatusNavigate={props.setStatusNavigate}
                         setStatusFood={setStatusFood}
                       />
                     </>
@@ -122,7 +123,7 @@ function Food({ setStatusNavigate }) {
                       {statusFood === "motherCat" ? (
                         <>
                           <MotherCat
-                            setStatusNavigate={setStatusNavigate}
+                            setStatusNavigate={props.setStatusNavigate}
                             setStatusFood={setStatusFood}
                           />
                         </>

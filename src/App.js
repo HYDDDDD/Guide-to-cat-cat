@@ -18,12 +18,10 @@ import Vaccine from "./component/Calculate/Vaccine/Vaccine";
 import Snack from "./component/Calculate/Snack/Snack";
 import Other from "./component/Calculate/Other/Other";
 import Cart from "./component/Calculate/Cart/Cart";
-import Kitten from "./component/Calculate/Food/Kitten";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
   const [statusSignIn, setStatusSignIn] = useState(false);
-
   //Status user
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -53,7 +51,10 @@ function App() {
       />
       <Route path="/post" element={<Post currentUser={currentUser} />} />
       <Route path="/addPost" element={<AddPost currentUser={currentUser} />} />
-      <Route path="/calculate" element={<Calculate />} />
+      <Route
+        path="/calculate"
+        element={<Calculate currentUser={currentUser} />}
+      />
       <Route path="/setting" element={<Setting />} />
       <Route path="/food" element={<Food />} />
       <Route path="/catLitter" element={<CatLitter />} />
@@ -62,7 +63,6 @@ function App() {
       <Route path="/snack" element={<Snack />} />
       <Route path="/other" element={<Other />} />
       <Route path="/cart" element={<Cart />} />
-      <Route path="/kitten" element={<Kitten />} />
     </Routes>
   );
 }

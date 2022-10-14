@@ -21,3 +21,5 @@ export const commentQuery = query(
 );
 
 export const collectionLike = collection(db, "likes");
+
+export const collectionProducts = collection(db, "products");
