@@ -125,7 +125,7 @@ function ConfirmItem(props) {
                   </div>
                   <div className="flex justify-between mt-10 font-bold text-lg">
                     <div>ราคา</div>
-                    <div>{products.data.price[selectedWeight]} บาท</div>
+                    <div>{products.data.price[selectedWeight]} บาท </div>
                   </div>
                 </div>
               </div>

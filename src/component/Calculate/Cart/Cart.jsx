@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import iconCart from "../../Picture/iconCart.png";
 import btnBack from "../../Picture/back.png";
 import { onSnapshot } from "firebase/firestore";
 import {
@@ -7,20 +6,24 @@ import {
   collectionProducts,
 } from "../../../firebase/firebase-collections";
 import { v4 as uuidv4 } from "uuid";
+import DeleteProduct from "./DeleteProduct";
+import rubbishBin from "../../Picture/rubbishBin.png";
 
 function Cart(props) {
   // console.log(props.productId);
   const [cart, setCart] = useState([]);
   const [ProductList, setProductList] = useState([]);
-  const [ProductId, setProductId] = useState([]);
   const [Products, setProducts] = useState([]);
-  const [filterProduct, setFilterProduct] = useState([]);
+  const [selectedWeight, setSelectedWeight] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [currentPrice, setCurrentPrice] = useState(0);
+  const [ProductId, setProductId] = useState("");
+  const result = [];
 
   useEffect(() => {
     loadCart();
     loadProducts();
-    findIdProduct();
-    // console.log(Products);
+    // price();
   }, []);
 
   //load products
@@ -47,57 +50,50 @@ function Cart(props) {
     });
   };
 
+  useEffect(() => {
+    findIdProduct();
+  }, [cart]);
+
   const findIdProduct = () => {
-    setProductId(
+    try {
+      setSelectedWeight(
+        cart.map((products) => ({
+          id: products.data.productId,
+          weight: products.data.productWeight,
+        }))
+      );
+      // selectedWeight.map((selected) => console.log(selected.seleted));
+
       cart
         .filter((user) => user.data.id === props.currentUser.uid)
-        .map((products) => ({
-          id: products.data.productId,
-        }))
-    );
+        .filter((cart) =>
+          Products.filter(
+            (products) => products.id === cart.data.productId
+          ).map((productsList) => {
+            result.push(productsList);
+          })
+        );
 
-    setFilterProduct(
-      ProductId.filter((cart) =>
-        Products.filter((products) => cart.id === products.id).map(
-          (products) => products
-        )
-      )
-    );
-
-    // for (let index = 0; index < filterProduct.length; index++) {
-    //   const element = filterProduct[index];
-
-    //   setProductList(
-    //     Products.filter((products) => products.id === element.id).map(
-    //       (element) => element
-    //     )
-    //   );
-    // }
-
-    // setProductList(
-    //   filterProduct.map((product) => {
-    //     Products.filter((products) => products.id === product.id).map(
-    //       (element) => {
-    //         return element;
-    //       }
-    //     );
-    //   })
-    // );
-
-    filterProduct.map((product) => {
-      Products.filter((products) => products.id === product.id).map(
-        (products) => {
-          return products;
-        }
-      );
-    });
+      setProductList(result);
+    } catch (error) {
+      console.error("Error : ", error);
+    }
   };
 
-  // console.log(ProductList);
-  // console.log(ProductId);
+  // const price = () => {
+  //   setCurrentPrice(
+  //     ProductList.map((products) => {
+  //       selectedWeight.filter((price) => price.id === products.id);
+  //     })
+  //   );
+
+  //   setTotalPrice(currentPrice.reduce((prev, current) => prev + current));
+  //   console.log(totalPrice);
+  // };
+
   return (
     <div className="flex justify-center mt-10">
-      <div className="sm:w-4/6 space-y-10 sm:space-y-16 p-4 sm:p-7 border-12 rounded-3xl border-4-blue">
+      <div className="sm:w-4/6 space-y-10 sm:space-y-16 p-4 sm:p-7 sm:border-12 rounded-3xl sm:border-4-blue">
         <div className="flex justify-between space-x-10">
           <button
             type="button"
@@ -105,54 +101,55 @@ function Cart(props) {
           >
             <img src={btnBack} alt="" />
           </button>
-          Cart
         </div>
-        <div className="flex justify-between space-x-10">
-          {cart
-            .filter((idUser) => idUser.data.id === props.currentUser.uid)
-            .filter((idProduct) => {
-              // console.log(idProduct.data.productId);
-              filterProduct.forEach((element) => {
-                console.log(element);
-              });
-            })}
+        <div className="flex flex-col justify-between space-y-5">
+          {ProductList.map((products) => {
+            return (
+              <div
+                key={products.id}
+                className="bg-white sm:space-x-10 w-full sm:flex rounded-md"
+                onClick={() => {
+                  // const selectedId = cart
+                  //   .filter((user) => user.data.id === props.currentUser.uid)
+                  //   .filter((id) => id.data.productId === products.id)
+                  //   .map((productId) => productId.id);
 
-          {/* {ProductList.filter((products) => products.data.type === "food")
-            .filter((products) => products.data.typeFood === "kitten")
-            .map((products) => {
-              return (
-                <div
-                  key={products.id}
-                  className="bg-white sm:space-x-10 w-full sm:flex rounded-md"
-                  onClick={() => {
-                    props.setProduct.setProductId(products.id);
-                    props.setProduct.setStatusNavigate("confirmItem");
-                  }}
-                >
-                  <div className="sm:mt-auto sm:mb-auto sm:w-3/4 flex flex-col justify-center">
-                    <div>
-                      <img src={products.data.productPic} alt="" />
-                    </div>
-                    <div className="flex justify-center mt-1"></div>
+                  // console.log(selectedId);
+                  // setProductId(selectedId);
+                  // console.log(ProductId);
+                }}
+              >
+                <div className="sm:mt-auto sm:mb-auto sm:w-3/4 flex flex-col justify-center">
+                  <div>
+                    <img src={products.data.productPic} alt="" />
                   </div>
-                  <div className="mt-2">
+                  <div className="flex justify-center mt-1"></div>
+                </div>
+                <div className="mt-2">
+                  <div className="flex justify-between">
                     <div className="font-semibold">
                       {products.data.productName}
                     </div>
-                    <div className="text-sm lg:ml-0 ml-9">
-                      {products.data.description}
-                      {
-                        <ul className="list-disc">
-                          {products.data.descriptionList.map((element) => {
-                            return <li key={uuidv4()}>{element}</li>;
-                          })}
-                        </ul>
-                      }
+                    <div>
+                      <DeleteProduct ProductId={ProductId} />
                     </div>
-                    <div className="mt-2 flex justify-center">
-                      <div className="space-y-2">
-                        <div className="flex space-x-2">
-                          {products.data.weight.map((weight) => {
+                  </div>
+                  <div className="text-sm lg:ml-0 ml-9">
+                    {products.data.description}
+                    {
+                      <ul className="list-disc">
+                        {products.data.descriptionList.map((element) => {
+                          return <li key={uuidv4()}>{element}</li>;
+                        })}
+                      </ul>
+                    }
+                  </div>
+                  <div className="mt-2 flex justify-center">
+                    <div className="space-y-2">
+                      <div className="flex space-x-2">
+                        {selectedWeight
+                          .filter((weight) => weight.id === products.id)
+                          .map((weight) => {
                             return (
                               <div key={uuidv4()}>
                                 <button
@@ -160,53 +157,43 @@ function Cart(props) {
                                   type="button"
                                 >
                                   <div className="font-bold text-sm text-white">
-                                    {weight}
+                                    {products.data.weight[weight.weight]}
                                   </div>
                                 </button>
                               </div>
                             );
                           })}
-                        </div>
-                        <div className="flex space-x-2">
-                          {products.data.price.map((price) => {
+                      </div>
+                      <div className="flex space-x-2">
+                        {selectedWeight
+                          .filter((price) => price.id === products.id)
+                          .map((price) => {
+                            // console.log(products.data.price[price.weight]);
                             return (
-                              <div
-                                key={uuidv4()}
-                                className="flex flex-col space-y-2"
-                              >
+                              <div key={uuidv4()}>
                                 <button
-                                  className="bg-4-blue w-20 py-1 rounded-md"
+                                  className="bg-3-blue w-20 px-5 py-1 rounded-md"
                                   type="button"
                                 >
                                   <div className="font-bold text-sm text-white">
-                                    {price} บาท
+                                    {products.data.price[price.weight]}
                                   </div>
                                 </button>
                               </div>
                             );
                           })}
-                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              );
-            })} */}
-          {/* {ProductList.filter(
-            (products) => products.data.id === props.currentUser
-          ).map((products) => {
-            console.log(products);
-          })} */}
-        </div>
-        <div>
-          <div className="flex justify-end">
-            <button
-              type="button"
-              onClick={() => props.setStatusNavigate("cart")}
-            >
-              <img className="sm:w-full w-20" src={iconCart} alt="" />
-            </button>
-          </div>
+                <div>
+                  <div className="flex justify-end">
+                    {/* {console.log(totalPrice)} */}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

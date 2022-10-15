@@ -4,17 +4,8 @@ import btnLike from "../Picture/like.png";
 import btnComment from "../Picture/comment.png";
 import CommentPost from "./CommentPost";
 import btnLikeRed from "../Picture/HeartRed.png";
-import {
-  addDoc,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  serverTimestamp,
-} from "firebase/firestore";
-import {
-  collectionLike,
-  postsQuery,
-} from "../../firebase/firebase-collections";
+import { onSnapshot } from "firebase/firestore";
+import { postsQuery } from "../../firebase/firebase-collections";
 import DeletePost from "./DeletePost";
 
 function PostContent({ currentUser }) {
@@ -26,10 +17,6 @@ function PostContent({ currentUser }) {
 
   useEffect(() => {
     loadPosts();
-
-    // if (clickLike === true) {
-    //   addPostLike();
-    // }
   }, []);
 
   const loadPosts = () => {
@@ -43,30 +30,6 @@ function PostContent({ currentUser }) {
       );
     });
   };
-
-  // const addPostLike = async () => {
-  //   if (clickLike === true && idPost !== "") {
-  //     console.log(clickLike);
-  //     console.log(idPost);
-  //     try {
-  //       await addDoc(collectionLike, {
-  //         id: currentUser.uid,
-  //         idPost: idPost,
-  //         name: currentUser.displayName,
-  //         photoURL: currentUser.photoURL,
-  //         timestamp: serverTimestamp(),
-  //       });
-  //     } catch (error) {
-  //       console.error("Error writing new message to Firebase Database", error);
-  //     }
-  //   }
-  // };
-
-  // const delPostLike = async (id) => {
-  //   console.log(id);
-  //   const docRef = doc(collectionLike, id);
-  //   await deleteDoc(docRef);
-  // };
 
   return (
     <div>
