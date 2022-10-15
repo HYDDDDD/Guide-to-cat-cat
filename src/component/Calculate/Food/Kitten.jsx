@@ -25,23 +25,6 @@ function Kitten(props) {
     });
   };
 
-  // Saves a new message to Cloud Firestore.
-  // const saveMessage = async () => {
-  //   //Add a new message entry to the Firebase database.
-  //   try {
-  //     await addDoc(collectionProducts, {
-  //       productId: productId,
-  //       productName: productName,
-  //       productPic: productPic,
-  //       productDescription: productDescription,
-  //       productWeight: productWeight,
-  //       productPrice: productPrice,
-  //     });
-  //   } catch (error) {
-  //     console.error("Error writing new message to Firebase Database", error);
-  //   }
-  // };
-
   return (
     <div className="flex justify-center lg:mt-10">
       <div className="lg:w-4/6 w-full space-y-10 sm:space-y-5 p-4 sm:p-7 lg:border-12 lg:rounded-3xl lg:border-4-blue">
@@ -49,7 +32,7 @@ function Kitten(props) {
           <div>
             <button
               type="button"
-              onClick={() => props.setProduct.setStatusFood("food")}
+              onClick={() => props.setStatusFood("food")}
             >
               <img src={btnBack} alt="" />
             </button>

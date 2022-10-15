@@ -137,6 +137,7 @@ function Calculate({ currentUser }) {
                                                       setStatusNavigate
                                                     }
                                                     productId={productId}
+                                                    setProductId={setProductId}
                                                     currentUser={currentUser}
                                                   />
                                                 </>

@@ -11,6 +11,12 @@ function ConfirmItem(props) {
   const [ProductList, setProductList] = useState([]);
   const [selectedWeight, setSelectedWeight] = useState("");
   const [id, setId] = useState("");
+  const [productName, setProductName] = useState("");
+  const [productPic, setProductPic] = useState();
+  const [productDescription, setProductDescription] = useState("");
+  const [color, setColor] = useState("");
+  const [productWeight, setProductWeight] = useState("");
+  const [productPrice, setProductPrice] = useState("");
 
   useEffect(() => {
     loadProducts();
@@ -102,7 +108,8 @@ function ConfirmItem(props) {
                                 index++
                               ) {
                                 if (products.data.weight[index] === weight) {
-                                  setId(props.productId);
+                                  setId(products.id);
+                                  props.setProductId(products.id);
                                   setSelectedWeight(index);
                                 }
                               }
