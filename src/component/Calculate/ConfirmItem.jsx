@@ -42,19 +42,35 @@ function ConfirmItem(props) {
   };
 
   const addCart = async () => {
-    if (id !== "") {
-      try {
-        await addDoc(collectionCart, {
-          id: props.currentUser.uid,
-          name: props.currentUser.displayName,
-          productId: id,
-          productWeight: selectedWeight,
-          timestamp: serverTimestamp(),
-        });
-      } catch (error) {
-        console.error("Error writing new message to Firebase Database", error);
-      }
-    }
+    // if (id !== "") {
+    //   try {
+    //     await addDoc(collectionCart, {
+    //       id: props.currentUser.uid,
+    //       name: props.currentUser.displayName,
+    //       productId: id,
+    //       productWeight: selectedWeight,
+    //       timestamp: serverTimestamp(),
+    //     });
+    //   } catch (error) {
+    //     console.error("Error writing new message to Firebase Database", error);
+    //   }
+    // }
+
+    // setId("");
+    // setSelectedWeight("");
+
+    ProductList.filter((products) => products.id === id).map((products) => {
+      // console.log(products.data.descriptionList);
+      addDoc(collectionCart, {
+        id: products.id,
+        name: products.data.productName,
+        description: products.data.description,
+        productPic: products.data.productPic,
+        descriptionList: products.data.descriptionList,
+        price: products.data.price[selectedWeight],
+        weight: products.data.weight[selectedWeight],
+      });
+    });
 
     setId("");
     setSelectedWeight("");
@@ -76,7 +92,7 @@ function ConfirmItem(props) {
           {ProductList.filter(
             (productId) => props.productId === productId.id
           ).map((products) => {
-            console.log(products);
+            // console.log(products);
             return (
               <div key={products.id} className="w-1/2">
                 <div>
