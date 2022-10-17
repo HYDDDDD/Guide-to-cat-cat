@@ -4,7 +4,8 @@ import btnBack from "../../Picture/back.png";
 import cart from "../../Picture/cart.png";
 import { onSnapshot } from "firebase/firestore";
 import { collectionProducts } from "../../../firebase/firebase-collections";
-import { v4 as uuidv4 } from "uuid";
+import RoyalCanin1 from "../../Picture/Royal-canin-1.png";
+import Hill from "../../Picture/Hill's-1.png";
 
 function MotherCat({ setStatusNavigate, setStatusFood }) {
   const [ProductList, setProductList] = useState([]);
@@ -37,90 +38,7 @@ function MotherCat({ setStatusNavigate, setStatusFood }) {
           <div className="font-bold text-xl">อาหารสำหรับแมวท้อง</div>
         </div>
         <div className="space-y-10">
-          {ProductList.filter((products) => products.data.type === "food")
-            .filter((products) => products.data.typeFood === "mother")
-            .map((products) => {
-              return (
-                <div
-                  key={products.id}
-                  className="bg-white sm:space-x-10 w-full sm:flex rounded-md"
-                >
-                  <div className="sm:mt-auto sm:mb-auto sm:w-3/4 flex flex-col justify-center">
-                    <div>
-                      <img src={products.data.productPic} alt="" />
-                    </div>
-                    <div className="flex justify-center mt-1">
-                      <button
-                        className=" bg-2-blue flex p-2 space-x-2 rounded-md"
-                        type="button"
-                      >
-                        <div>
-                          <img src={cart} alt="" />
-                        </div>
-                        <div className="mt-auto mb-auto font-semibold text-4-blue">
-                          เพิ่มสินค้าลงตะกร้า
-                        </div>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="mt-2">
-                    <div className="font-semibold">
-                      {products.data.productName}
-                    </div>
-                    <div className="text-sm lg:ml-0 ml-9">
-                      {products.data.description}
-                      {
-                        <ul className="list-disc">
-                          {products.data.descriptionList.map((element) => {
-                            return <li key={uuidv4()}>{element}</li>;
-                          })}
-                        </ul>
-                      }
-                    </div>
-                    <div className="mt-2 flex justify-center">
-                      <div className="space-y-2">
-                        <div className="flex space-x-2">
-                          {products.data.weight.map((weight) => {
-                            return (
-                              <div key={uuidv4()}>
-                                <button
-                                  className="bg-3-blue w-20 px-5 py-1 rounded-md"
-                                  type="button"
-                                >
-                                  <div className="font-bold text-sm text-white">
-                                    {weight}
-                                  </div>
-                                </button>
-                              </div>
-                            );
-                          })}
-                        </div>
-                        <div className="flex space-x-2">
-                          {products.data.price.map((price) => {
-                            return (
-                              <div
-                                key={uuidv4()}
-                                className="flex flex-col space-y-2"
-                              >
-                                <button
-                                  className="bg-4-blue w-20 py-1 rounded-md"
-                                  type="button"
-                                >
-                                  <div className="font-bold text-sm text-white">
-                                    {price} บาท
-                                  </div>
-                                </button>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          {/* <div className="bg-white sm:space-x-10 w-full sm:flex rounded-md">
+          <div className="bg-white sm:space-x-10 w-full sm:flex rounded-md">
             <div className="sm:mt-auto sm:mb-auto sm:w-3/4 flex flex-col justify-center">
               <div>
                 <img src={RoyalCanin1} alt="" />
@@ -202,10 +120,10 @@ function MotherCat({ setStatusNavigate, setStatusFood }) {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
 
-        {/* <div className="bg-white sm:space-x-10 w-full sm:flex rounded-md">
+        <div className="bg-white sm:space-x-10 w-full sm:flex rounded-md">
           <div className="sm:mt-auto sm:mb-auto sm:w-3/4 flex flex-col justify-center">
             <div>
               <img src={Hill} alt="" />
@@ -269,7 +187,7 @@ function MotherCat({ setStatusNavigate, setStatusFood }) {
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
 
         <div>
           <div className="flex justify-end mt-10">

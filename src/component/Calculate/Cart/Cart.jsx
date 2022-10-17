@@ -9,9 +9,8 @@ import ScrollToBottom from "react-scroll-to-bottom";
 function Cart(props) {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState("");
-  const [currentPrice, setCurrentPrice] = useState([]);
   const [selectedId, setSelectedId] = useState("");
-  // const totalPrice = 0;
+  const count = 0;
 
   useEffect(() => {
     loadCart();
@@ -30,7 +29,11 @@ function Cart(props) {
   };
 
   useEffect(() => {
-    summation();
+    if (cart.length === 0) {
+      setTotalPrice(0);
+    } else {
+      summation();
+    }
   }, [cart]);
 
   const summation = () => {
@@ -38,13 +41,12 @@ function Cart(props) {
       const sum = cart
         .map((products) => products.data.price)
         .reduce((prev, current) => {
-          return prev + +current;
+          return prev + current;
         });
 
-      console.log(sum);
+      // console.log(sum);
       setTotalPrice(sum);
     });
-    // console.log(totalPrice);
   };
 
   return (
@@ -75,7 +77,11 @@ function Cart(props) {
                         <div className="font-semibold">
                           {products.data.name}
                         </div>
-                        <div onClick={() => setSelectedId(products.id)}>
+                        <div
+                          onClick={() => {
+                            setSelectedId(products.id);
+                          }}
+                        >
                           <DeleteProduct selectedId={selectedId} />
                         </div>
                       </div>

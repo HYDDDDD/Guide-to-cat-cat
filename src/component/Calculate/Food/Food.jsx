@@ -77,16 +77,6 @@ function Food(props) {
                   </div>
                 </button>
               </div>
-              <div>
-                <div className="flex justify-end mt-10">
-                  <button
-                    type="button"
-                    onClick={() => props.setStatusNavigate("cart")}
-                  >
-                    <img className="sm:w-28 w-20" src={iconCart} alt="" />
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
         </>
@@ -94,11 +84,7 @@ function Food(props) {
         <>
           {statusFood === "kitten" ? (
             <>
-              <Kitten
-                // setStatusNavigate={props.setStatusNavigate}
-                setProduct={props}
-                setStatusFood={setStatusFood}
-              />
+              <Kitten setProduct={props} setStatusFood={setStatusFood} />
             </>
           ) : (
             <>
