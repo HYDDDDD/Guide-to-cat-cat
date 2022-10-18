@@ -18,6 +18,17 @@ import Vaccine from "./component/Calculate/Vaccine/Vaccine";
 import Snack from "./component/Calculate/Snack/Snack";
 import Other from "./component/Calculate/Other/Other";
 import Cart from "./component/Calculate/Cart/Cart";
+import PersonalInformation from "./component/Setting/PersonalInformation";
+import Editname from "./component/Setting/Editname";
+import Account from "./component/Setting/Account";
+import PasswordSecurity from "./component/Setting/PasswordSecurity";
+import Payment from "./component/Setting/Payment";
+import Editpass from "./component/Setting/Editpass";
+import Editinformation from "./component/Setting/Editinformation";
+import Language from "./component/Setting/Language";
+import Darkmodee from "./component/Setting/Darkmodee";
+import Activitylog from "./component/Setting/Activitylog";
+import Logout from "./component/Setting/Logout";
 
 function App() {
   const [currentUser, setCurrentUser] = useState([]);
@@ -56,6 +67,17 @@ function App() {
         element={<Calculate currentUser={currentUser} />}
       />
       <Route path="/setting" element={<Setting />} />
+      <Route path="/account" element={<Account />} />
+      <Route path="/personalInformation" element={<PersonalInformation currentUser={currentUser}/>} />
+      <Route path="/editname" element={<Editname />} />
+      <Route path="/editinformation" element={<Editinformation />} />
+      <Route path="/passwordSecurity" element={<PasswordSecurity />} />
+      <Route path="/editpass" element={<Editpass />} />
+      <Route path="/payment" element={<Payment />} />
+      <Route path="/language" element={<Language />} />
+      <Route path="/darkmodee" element={<Darkmodee />} />
+      <Route path="/activitylog" element={<Activitylog />} />
+      <Route path="/logout" element={<Logout />} />
       <Route path="/food" element={<Food />} />
       <Route path="/catLitter" element={<CatLitter />} />
       <Route path="/toy" element={<Toy />} />
